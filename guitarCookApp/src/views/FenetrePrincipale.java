@@ -55,7 +55,7 @@ public class FenetrePrincipale
   private JTable jtable = new JTable(carteJTableModel);
   private JScrollPane jscrollpane = new JScrollPane(jtable);
   
-  public static ArrayList<Cartes> liste = new ArrayList();
+  public static ArrayList<Cartes> liste = new ArrayList<Cartes>();
   
 
 
@@ -76,38 +76,9 @@ public class FenetrePrincipale
     jtable.addMouseListener(new MouseListener()
     {
       public void mousePressed(MouseEvent arg0) {}
-      
-
-
-
-
-
-
-
       public void mouseClicked(MouseEvent e) {}
-      
-
-
-
-
-
-
       public void mouseEntered(MouseEvent e) {}
-      
-
-
-
-
-
-
       public void mouseExited(MouseEvent e) {}
-      
-
-
-
-
-
-
       public void mouseReleased(MouseEvent e) {}
     });
     JPanel panel = new JPanel();
@@ -123,7 +94,7 @@ public class FenetrePrincipale
     lblCarte.setBounds(10, 53, 62, 14);
     contentPane.add(lblCarte);
     
-    cbCarte = new JComboBox();
+    cbCarte = new JComboBox<String>();
     cbCarte.setBackground(Color.WHITE);
     cbCarte.setToolTipText("test");
     cbCarte.setMaximumRowCount(500);
@@ -186,26 +157,37 @@ public class FenetrePrincipale
     spinMax.setBounds(838, 80, 46, 20);
     contentPane.add(spinMax);
     
-    JButton btnGenerer = new JButton("Générer");
-    btnGenerer.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent arg0) {
-        generer();
-      }
-    });
-    btnGenerer.setBounds(244, 122, 112, 23);
-    contentPane.add(btnGenerer);
-    
     JButton btnEnregistrer = new JButton("Enregistrer");
+    btnEnregistrer.setEnabled(false);
     btnEnregistrer.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent arg0) {
         enregistrer();
       }
     });
-    btnEnregistrer.setBounds(565, 122, 112, 23);
+    btnEnregistrer.setBounds(366, 122, 112, 23);
     contentPane.add(btnEnregistrer);
+    
+    JButton btnGenerer = new JButton("Générer");
+    btnGenerer.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent arg0) {
+        generer();
+        btnEnregistrer.setEnabled(true);
+      }
+    });
+    btnGenerer.setBounds(100, 122, 112, 23);
+    contentPane.add(btnGenerer);
     
     jscrollpane.setBounds(0, 172, 894, 249);
     contentPane.add(jscrollpane);
+    
+    JButton btnSupprimer = new JButton("Supprimer");
+    btnSupprimer.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent arg0) {
+          supprimer();
+        }
+      });
+    btnSupprimer.setBounds(612, 122, 112, 23);
+    contentPane.add(btnSupprimer);
   }
   
   public void generer() {
@@ -288,7 +270,7 @@ public class FenetrePrincipale
   }
   
   public void remplissageTableau() {
-    List<Save> lesSaves = new ArrayList();
+    List<Save> lesSaves = new ArrayList<Save>();
     File rep = new File("C:\\Users\\Public\\Documents\\GuitarCookApp");
     File[] fichierstxt = rep.listFiles(new FilenameFilter() {
       public boolean accept(File dir, String name) {
@@ -317,5 +299,18 @@ public class FenetrePrincipale
       lesSaves.add(new Save("Aucun jeu n'a été trouvé", "", "", "", ""));
       carteJTableModel.loadData(lesSaves);
     }
+  }
+  //TODO : Choix de fichier par selection dans le tableau
+  public void supprimer() {
+	  int ligne = jtable.getSelectedRow();
+	  if(ligne == -1) {
+		  JOptionPane.showMessageDialog(this, "Vous devez selectionner une ligne du tableau", "Supprimer", 1);
+	  }else {
+		  File fichier = new File("C:\\Users\\Public\\Documents\\GuitarCookApp\\" + jtable.getValueAt(ligne, 0) + ".txt");
+		  if(JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer \"" + jtable.getValueAt(ligne, 0) + "\" ? Pas d'annulation possible", "Supprimer", 0, 3) == 0) {
+			  fichier.delete();
+			  remplissageTableau();
+		  }
+	  }
   }
 }

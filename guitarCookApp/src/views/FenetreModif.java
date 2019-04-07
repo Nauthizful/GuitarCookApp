@@ -51,7 +51,7 @@ public class FenetreModif
   private JButton btnModifier;
   
   private JButton btnAnnuler;
-  private ArrayList<String> couleurs = new ArrayList();
+  private ArrayList<String> couleurs = new ArrayList<String>();
   
 
 
@@ -170,7 +170,7 @@ public class FenetreModif
   public JComboBox<String> getInputModifCarte()
   {
     if (inputModifCarte == null) {
-      inputModifCarte = new JComboBox();
+      inputModifCarte = new JComboBox<String>();
     }
     return inputModifCarte;
   }
@@ -179,7 +179,7 @@ public class FenetreModif
   public JComboBox<String> getInputModifCouleur()
   {
     if (inputModifCouleur == null) {
-      inputModifCouleur = new JComboBox();
+      inputModifCouleur = new JComboBox<String>();
     }
     return inputModifCarte;
   }
