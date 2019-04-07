@@ -5,16 +5,6 @@ import java.util.List;
 import java.util.Vector;
 import javax.swing.table.AbstractTableModel;
 
-
-
-
-
-
-
-
-
-
-
 public class CarteJTableModel
   extends AbstractTableModel
 {
@@ -33,56 +23,32 @@ public class CarteJTableModel
       "Tempo" };
     
 
-    lignes = new Vector();
+    lignes = new Vector<String[]>();
   }
   
-
-
-
-
   public int getColumnCount()
   {
     return nomColonnes.length;
   }
   
-
-
-
-
   public int getRowCount()
   {
     return lignes.size();
   }
-  
-
-
-
-
-
 
   public Object getValueAt(int rowIndex, int columnIndex)
   {
     return ((String[])lignes.get(rowIndex))[columnIndex];
   }
-  
-
-
-
-
 
   public String getColumnName(int column)
   {
     return nomColonnes[column];
   }
-  
-
-
-
-
 
   public void loadData(List<Save> lesSaves)
   {
-    lignes = new Vector();
+    lignes = new Vector<String[]>();
     for (Save uneSave : lesSaves)
     {
 

@@ -1,9 +1,6 @@
-import views.Fenetre;
 import views.FenetrePrincipale;
 import java.awt.EventQueue;
 
-
-//Ceci est un test
 
 public class Main
 {

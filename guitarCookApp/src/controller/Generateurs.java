@@ -13,8 +13,8 @@ public class Generateurs {
   public static String randCouleur() {
     String result = "";
     java.util.Random index = new java.util.Random();
-    ArrayList<String> couleurs = new ArrayList();
-    ArrayList<String> nuances = new ArrayList();
+    ArrayList<String> couleurs = new ArrayList<String>();
+    ArrayList<String> nuances = new ArrayList<String>();
     
     couleurs.add("Bleue");
     couleurs.add("Vert");
@@ -23,7 +23,7 @@ public class Generateurs {
     
     nuances.add("clair");
     nuances.add("");
-    nuances.add("foncÃ©");
+    nuances.add("foncé");
     
     result = (String)couleurs.get(index.nextInt(4)) + " " + (String)nuances.get(index.nextInt(3));
     
@@ -40,7 +40,7 @@ public class Generateurs {
   
   public static String randAccords(int nbAccords) {
     String result = "";
-    ArrayList<Integer> tab = new ArrayList();
+    ArrayList<Integer> tab = new ArrayList<Integer>();
     int remplissage = 1;
     java.util.Random index = new java.util.Random();
     
